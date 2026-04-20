@@ -1,4 +1,4 @@
-path = "medicine_info.txt"
+path = "balls.txt"
 
 def read_file(path):
     """
@@ -15,7 +15,7 @@ def read_file(path):
         f = open(path, "r")
     except FileNotFoundError as e:
         print(f"Error: {e}")
-        return
+        return {}
     lines = f.readlines()
     med_info = {} # Stores the med information in the format 1 : [med information]
     idx = 0 # Stores the index for medicine information 
@@ -26,8 +26,8 @@ def read_file(path):
         med_name = content[0]
         brand_name = content[1]
         med_quantity_tablets = int(content[2])
-        rate_tablet = int(content[3])
-        rate_strip = int(content[4])
+        rate_tablet = float(content[3])
+        rate_strip = float(content[4])
         num_tablet_per_strip = int(content[5])
         med_info[idx] = [med_name, brand_name, med_quantity_tablets, rate_tablet, rate_strip, num_tablet_per_strip]
     return med_info
