@@ -1,4 +1,4 @@
-path = "balls.txt"
+path = "medicine_info.txt"
 
 def read_file(path):
     """
@@ -43,9 +43,12 @@ def display():
     """
     display_content = read_file(path)
 
-    print(f"{"S.N.":<10}{"Meidicine Name":20}{"Brand Name":<20}{"Quantity (Tablets)":<20}{"Rate (Tablet)":<20}{"Rate(Strip)":<20}{"Tablet Per Strip":<20}")
+    print(f"{"S.N.":<10}|{"Meidicine Name":30}|{"Brand Name":<20}|{"Quantity (Tablets)":<20}|{"Rate (Tablet)":<20}|{"Rate(Strip)":<20}|{"Tablet Per Strip":<20}")
+    print("-"*140)
     for key, values in display_content.items():
-        print(f"{key:<10}{values[0]:<30}{values[1]:<20}{values[2]:<20}{values[3]:<20}{values[4]:<20}{values[5]:<20}")
+        print(f"{key:<10}|{values[0]:<30}|{values[1]:<20}|{values[2]:<20}|{values[3]:<20}|{values[4]:<20}|{values[5]:<20}")
+        print("-"*130)
+    
 
 
 display()
