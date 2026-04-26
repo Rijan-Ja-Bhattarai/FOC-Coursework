@@ -1,3 +1,5 @@
+from datetime import datetime 
+
 path = "medicine_info.txt"
 
 def read_file(path):
@@ -32,26 +34,51 @@ def read_file(path):
         med_info[idx] = [med_name, brand_name, med_quantity_tablets, rate_tablet, rate_strip, num_tablet_per_strip]
     return med_info
 
-def display():
-    """
-    Chains the function from read file to display the contents of the file 
+raw_data = read_file(path)
 
-    args: None
+def display(display_content):
+    """
+    Takes raw data as input from medicine_info.txt and displays the data in a tabular format 
+
+    args: 
+    display_content: A dictionary that contains raw medicine information in the format 1 : [med information] which is returned by the read_file function. This is passed as an argument to the display function to display the contents of the file in a tabular format. This is done to keep the code modular and to allow for better readability and maintainability of the code by keeping the logic of reading the file and displaying the contents
+    inside another independent function 
 
     output: 
         Output of medicine information in a tabular format
     """
-    display_content = read_file(path)
 
-    print(f"{"S.N.":<10}|{"Meidicine Name":30}|{"Brand Name":<20}|{"Quantity (Tablets)":<20}|{"Rate (Tablet)":<20}|{"Rate(Strip)":<20}|{"Tablet Per Strip":<20}")
-    print("-"*140)
+    if display_content is None:
+        print("No Data To Display")
+        return
+
+    print("-"*146)
+    print(f"{"S.N.":<10}|{"Meidicine Name":30}|{"Brand Name":<20}|{"Quantity (Tablets)":<20}|{"Rate (Tablet)":<20}|{"Rate(Strip)":<20}|{"Tablet Per Strip":<20}|")
+    print("-"*10 + "|" + "-" *30 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" * 20 + "|")
     for key, values in display_content.items():
-        print(f"{key:<10}|{values[0]:<30}|{values[1]:<20}|{values[2]:<20}|{values[3]:<20}|{values[4]:<20}|{values[5]:<20}")
-        print("-"*130)
+        print(f"{key:<10}|{values[0]:<30}|{values[1]:<20}|{values[2]:<20}|{values[3]:<20}|{values[4]:<20}|{values[5]:<20}|")
+        print("-"*10 + "|" + "-" *30 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" * 20 + "|")
     
 
 
-display()
+display(raw_data)
+
+# Main 
+customer_name = input("Customer Name: ")
+while True: 
+    
+    med_name = ""
+    while len(med_name) == 0:
+        med_name = input("Medicine Name: ").strip()
+
+        if not any([med_name in med_info for med_info in raw_data.values()]):
+            print("Medicine unavailable")
+
+        if len(med_name) == 0:
+            print("Medicine Name can't be empty")
+    
+    
+    
 
 
         
