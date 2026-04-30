@@ -1,4 +1,6 @@
-from datetime import datetime 
+from datetime import datetime as dt
+from UtilityFunctions import is_empty
+import math
 
 path = "medicine_info.txt"
 
@@ -19,6 +21,7 @@ def read_file(path):
         print(f"Error: {e}")
         return {}
     lines = f.readlines()
+    f.close()
     med_info = {} # Stores the med information in the format 1 : [med information]
     idx = 0 # Stores the index for medicine information 
     for line in lines:
@@ -41,7 +44,10 @@ def display(display_content):
     Takes raw data as input from medicine_info.txt and displays the data in a tabular format 
 
     args: 
-    display_content: A dictionary that contains raw medicine information in the format 1 : [med information] which is returned by the read_file function. This is passed as an argument to the display function to display the contents of the file in a tabular format. This is done to keep the code modular and to allow for better readability and maintainability of the code by keeping the logic of reading the file and displaying the contents
+    display_content: A dictionary that contains raw medicine information in the format 1 : [
+    med information] which is returned by the read_file function. This is passed as an argument to the display function to display 
+    the contents of the file in a tabular format. This is done to keep the code modular and to allow for better readability and 
+    maintainability of the code by keeping the logic of reading the file and displaying the contents
     inside another independent function 
 
     output: 
@@ -64,19 +70,66 @@ def display(display_content):
 display(raw_data)
 
 # Main 
-customer_name = input("Customer Name: ")
-while True: 
-    
-    med_name = ""
-    while len(med_name) == 0:
-        med_name = input("Medicine Name: ").strip()
+med_unit_type = ["t", "s"]
+customer_name = ""
+while is_empty(customer_name):
+    customer_name = input("Customer Name: ").strip()
 
-        if not any([med_name in med_info for med_info in raw_data.values()]):
-            print("Medicine unavailable")
+    if is_empty(customer_name):
+        print("Name can't be empty")
 
-        if len(med_name) == 0:
-            print("Medicine Name can't be empty")
+def main():
+    """Function that contains the main module of the function"""
+    id = -1
+    unit_type = ""
+    quantity = -1
+
+    # Validate id
+    while id > len(raw_data) or id < 0 or type(id) == str:
+        try:
+            id = int(input("Medicine ID: "))
+        except ValueError:
+            print("ID Must be an integer") 
+            continue 
+        if id < 0:
+            print("Invalid index")     
+
+    # Validate Unit Type
+    while unit_type not in med_unit_type:
+        unit_type = input("Unit Type (Strip/Tablet): ").lower()
+        unit_type = unit_type[0]
+        if unit_type[0] not in med_unit_type:
+            print("Invalid Med Unit")
     
+    t = raw_data.get(id)
+    tablet_quantity = t[2]
+    tablet_per_strip = t[5]
+    
+    while quantity < 0 or quantity > tablet_quantity or type(quantity) == str:
+        try:
+            quantity = int(input("Quantity: "))
+        except ValueError:
+            print("Quantity must be an integer value")
+        if quantity < 0 or quantity > tablet_quantity:
+            print("Quantity not available")
+        if unit_type == "s":
+            if quantity / tablet_per_strip < 0:
+                print("Insufficient number of tablets per strip, buy more tablets to make the purhcase or buy in tablets")
+                opt = input("Do you wish to buy in tablets? (y/n)").lower()
+                opt = opt[0]
+                while opt not in ["y", "n"]:
+                    print("Invalid input")
+                    opt = input("Do you wish to buy in tablets? (y/n)").lower()
+                if opt == "y":
+                    pass
+
+
+main()
+    
+        
+
+
+        
     
     
 
