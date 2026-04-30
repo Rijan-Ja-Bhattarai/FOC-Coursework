@@ -1,8 +1,9 @@
+import os
 from datetime import datetime as dt
 from UtilityFunctions import is_empty
 import math
 
-path = "medicine_info.txt"
+path = os.path.abspath("medicine_info.txt")
 
 def read_file(path):
     """
@@ -20,6 +21,8 @@ def read_file(path):
     except FileNotFoundError as e:
         print(f"Error: {e}")
         return {}
+    except Exception as e:
+        print(e)
     lines = f.readlines()
     f.close()
     med_info = {} # Stores the med information in the format 1 : [med information]
@@ -66,23 +69,28 @@ def display(display_content):
         print("-"*10 + "|" + "-" *30 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" *20 + "|" + "-" * 20 + "|")
     
 
-
-display(raw_data)
-
 # Main 
-med_unit_type = ["t", "s"]
-customer_name = ""
-while is_empty(customer_name):
-    customer_name = input("Customer Name: ").strip()
-
-    if is_empty(customer_name):
-        print("Name can't be empty")
-
 def main():
-    """Function that contains the main module of the function"""
+    """Main Function"""
+
+    display(raw_data)
+
     id = -1
     unit_type = ""
     quantity = -1
+    med_unit_type = ["t", "s", "strip", "tablet", "strips", "tablets"]
+    customer_name = ""
+
+    while is_empty(customer_name):
+        try:
+            customer_name = input("Customer Name: ").strip()
+        except KeyboardInterrupt:
+            print("Input interrupted by user")
+        except Exception:
+            print("An exception occured")
+
+        if is_empty(customer_name):
+            print("Name can't be empty")
 
     # Validate id
     while id > len(raw_data) or id < 0 or type(id) == str:
@@ -93,7 +101,7 @@ def main():
             continue 
         except KeyboardInterrupt:
             print("Input cancelled by user")
-        except Exception as e:
+        except Exception:
             print("An exception occured")
         if id < 0:
             print("Invalid index")     
@@ -101,8 +109,7 @@ def main():
     # Validate Unit Type
     while unit_type not in med_unit_type:
         unit_type = input("Unit Type (Strip/Tablet): ").lower()
-        unit_type = unit_type[0]
-        if unit_type[0] not in med_unit_type:
+        if unit_type not in med_unit_type:
             print("Invalid Med Unit")
     
     # Validate sufficient amount of quantity w.r.t unit type
@@ -122,6 +129,7 @@ def main():
         if unit_type == med_unit_type[1]:
             if quantity / tablet_per_strip < 1:
                 print("Insufficient number of tablets per strip, buy more tablets to make the purhcase or buy in tablets")
+                discount = None
                 try:
                     opt = input("Do you wish to buy in tablets? (y/n): ").lower()
                     opt = opt[0]
@@ -132,17 +140,67 @@ def main():
                         unit_type = "t"
                 except KeyboardInterrupt:
                     print("Input interrupted by user")
+                except Exception:
+                    print("An exception occured")
+            elif quantity / tablet_per_strip >= 2:
+                discount = 0.5   
+                return [customer_name, id, unit_type, quantity, discount]
             else:
-                break
+                return [customer_name, id, unit_type, quantity]
         else:
-            break
+            return [customer_name, id, unit_type, quantity] 
 
 
+def generate_invoice(med_info, date_of_transaction):
+    total_cost = calc_invoice(med_info)
+    output_path = os.path.abspath("invoice.txt")
+    try:
+        f = open(output_path, "+a")
+    except FileExistsError as e: 
+        print(e)
+    except Exception as er:
+        print(er)
+    f.writelines(str(med_info, total_cost,date_of_transaction))
+    print(f"Invoice created at {output_path}")
+    f.close()
+
+def calc_invoice(med_info):
+    total_cost = 0
+    for item in med_info:
+        medication = raw_data.get(item[1])
+        unit_type = item[2]
+        quantity = item[3]
+        if unit_type == "s":
+            cost = quantity * medication[4]
+        else:
+            cost = quantity * medication[3]
+        if len(item) > 4:
+            cost *= 1 - item[4]
+        total_cost += cost
+    return total_cost
+
+med_info = []
 while True:
-    main()
-    cont = input("Buy More Medicines (y/n): ").lower()
+    med_info.append(main()) # Store the contents from main to med_info to be used in other functions
+    cont = ""
+    opt = ["y", "n", "yes", "no"]
+    while cont not in opt or is_empty(cont):
+        try:
+            cont = input("Add more medicines to cart (y/n): ").lower()
+        except KeyboardInterrupt:
+            print("Input interrupted by user")
+        except Exception:
+            print("An error occured")
+        if cont not in opt:
+            print("Invalid input")
+        if is_empty(cont):
+            print("Operation can't be left empty")
+        
     cont = cont[0]
-    if cont == "n":
+    if cont != opt[0]:
+        print("Thank you for choosing Med Store Pvt Ltd. We hope to see you again :D")
+        dot = dt.now()
+        generate_invoice(med_info, dot)
         break
 
         
