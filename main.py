@@ -91,6 +91,10 @@ def main():
         except ValueError:
             print("ID Must be an integer") 
             continue 
+        except KeyboardInterrupt:
+            print("Input cancelled by user")
+        except Exception as e:
+            print("An exception occured")
         if id < 0:
             print("Invalid index")     
 
@@ -101,31 +105,46 @@ def main():
         if unit_type[0] not in med_unit_type:
             print("Invalid Med Unit")
     
+    # Validate sufficient amount of quantity w.r.t unit type
     t = raw_data.get(id)
     tablet_quantity = t[2]
     tablet_per_strip = t[5]
     
-    while quantity < 0 or quantity > tablet_quantity or type(quantity) == str:
+    while True: # Logic became too large, replaced with True
         try:
             quantity = int(input("Quantity: "))
         except ValueError:
             print("Quantity must be an integer value")
+        except KeyboardInterrupt :
+            print("Input interrputed by user")
         if quantity < 0 or quantity > tablet_quantity:
             print("Quantity not available")
-        if unit_type == "s":
-            if quantity / tablet_per_strip < 0:
+        if unit_type == med_unit_type[1]:
+            if quantity / tablet_per_strip < 1:
                 print("Insufficient number of tablets per strip, buy more tablets to make the purhcase or buy in tablets")
-                opt = input("Do you wish to buy in tablets? (y/n)").lower()
-                opt = opt[0]
-                while opt not in ["y", "n"]:
-                    print("Invalid input")
-                    opt = input("Do you wish to buy in tablets? (y/n)").lower()
-                if opt == "y":
-                    pass
+                try:
+                    opt = input("Do you wish to buy in tablets? (y/n): ").lower()
+                    opt = opt[0]
+                    while opt not in ["y", "n"]:
+                        print("Invalid input")
+                        opt = input("Do you wish to buy in tablets? (y/n): ").lower()
+                    if opt == "y":
+                        unit_type = "t"
+                except KeyboardInterrupt:
+                    print("Input interrupted by user")
+            else:
+                break
+        else:
+            break
 
 
-main()
-    
+while True:
+    main()
+    cont = input("Buy More Medicines (y/n): ").lower()
+    cont = cont[0]
+    if cont == "n":
+        break
+
         
 
 
