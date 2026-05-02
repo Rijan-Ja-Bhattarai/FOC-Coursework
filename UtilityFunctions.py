@@ -18,26 +18,30 @@ def is_empty(input_field):
 
 def calc_invoice(med_info, raw_data):
     """
-    Function to calculate total cost of purchased drugs 
+    Function to calculate total cost of purchased or restocked drugs.
 
-    Args: 
-        med_info: list of medicine information for data retrival 
-        raw_data: data from original medicine information file for quantity reduction after purchase has been done 
-    
-    Returns: 
-        total cost of purchased medicines 
+    Args:
+        med_info:  List of medicine information for data retrieval.
+        raw_data:  Data from original medicine information file.
+    Returns:
+        Total cost of the transaction as a float.
     """
     total_cost = 0
     for item in med_info:
         medication = raw_data.get(item[1])
         unit_type = item[4]
         quantity = item[5]
+
+        # Use strip rate for strip purchases, tablet rate otherwise
         if unit_type == "s":
             cost = quantity * medication[4]
         else:
             cost = quantity * medication[3]
+
+        # Discount is only present on sale entries
         if len(item) > 6:
             cost *= 1 - item[6]
+
         total_cost += cost
     return total_cost
     

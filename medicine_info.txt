@@ -1,50 +1,50 @@
-Paracetamol 500mg, Lomus, 1200, 5, 45, 10
-Cetirizine 10mg, Quest, 800, 4, 35, 12
-Amoxicillin 500mg, Nepal Remedies, 500, 12, 110, 15
-Pantoprazole 40mg, Deurali-Janta, 600, 7, 60, 8
-ORS Sachet, Time Pharma, 300, 20, 180, 12
-Azithromycin 500mg, Lomus, 450, 3, 220, 8
-Ibuprofen 400mg, Quest, 950, 6, 28, 20
-Ciprofloxacin 500mg, Nepal Remedies, 320, 9, 85, 10
-Diclofenac 50mg, Deurali-Janta, 700, 4, 40, 15
-Omeprazole 20mg, Time Pharma, 600, 5, 55, 12
-Losartan 50mg, Lomus, 500, 8, 90, 7
-Metformin 500mg, Quest, 1100, 3, 25, 25
-Doxycycline 100mg, Nepal Remedies, 400, 7, 110, 9
-Amlodipine 5mg, Deurali-Janta, 750, 6, 45, 14
-Cetirizine 5mg, Time Pharma, 880, 2, 30, 18
-Paracetamol 250mg, Lomus, 1500, 4, 25, 30
-Amoxiclav 625mg, Quest, 300, 10, 180, 6
-Pantoprazole 20mg, Nepal Remedies, 520, 5, 45, 10
-Ofloxacin 200mg, Deurali-Janta, 410, 8, 95, 11
-Montelukast 10mg, Time Pharma, 260, 6, 130, 5
-Atenolol 50mg, Lomus, 620, 7, 65, 9
-Hydrochlorothiazide 25mg, Quest, 900, 4, 35, 16
-Cloxacillin 500mg, Nepal Remedies, 340, 11, 105, 7
-Rabeprazole 20mg, Deurali-Janta, 580, 5, 70, 13
-Fexofenadine 120mg, Time Pharma, 470, 6, 140, 8
-Cefixime 200mg, Lomus, 290, 9, 210, 4
-Tramadol 50mg, Quest, 510, 3, 75, 10
-Moxifloxacin 400mg, Nepal Remedies, 230, 12, 250, 3
-Glibenclamide 5mg, Deurali-Janta, 680, 4, 40, 12
-Loratadine 10mg, Time Pharma, 820, 5, 28, 22
-Salbutamol 2mg, Lomus, 540, 6, 32, 15
-Erythromycin 250mg, Quest, 370, 8, 115, 7
-Fluconazole 150mg, Nepal Remedies, 280, 7, 160, 5
-Naproxen 250mg, Deurali-Janta, 630, 5, 55, 11
-Domperidone 10mg, Time Pharma, 720, 4, 38, 14
-Cephalexin 500mg, Lomus, 390, 10, 125, 6
-Clopidogrel 75mg, Quest, 460, 6, 95, 8
-Metronidazole 400mg, Nepal Remedies, 850, 5, 42, 20
-Amlodipine 10mg, Deurali-Janta, 590, 7, 60, 9
-Chlorpheniramine 4mg, Time Pharma, 1100, 3, 18, 30
-Dicloxacillin 500mg, Lomus, 310, 9, 145, 5
-Bisoprolol 5mg, Quest, 540, 6, 80, 7
-Nitrofurantoin 100mg, Nepal Remedies, 370, 8, 98, 6
-Spironolactone 25mg, Deurali-Janta, 430, 5, 72, 8
-Diazepam 5mg, Time Pharma, 280, 11, 45, 4
-Carbamazepine 200mg, Lomus, 210, 10, 135, 3
-Prednisolone 5mg, Quest, 670, 4, 48, 16
-Ranitidine 150mg, Nepal Remedies, 750, 5, 52, 13
-Ketoconazole 200mg, Deurali-Janta, 310, 7, 118, 6
-Propranolol 40mg, Time Pharma, 490, 6, 62, 10
+1,Paracetamol 500mg, Lomus,1200,5.0,45.0,10
+2,Cetirizine 10mg, Quest,800,4.0,35.0,12
+3,Amoxicillin 500mg, Nepal Remedies,500,12.0,110.0,15
+4,Pantoprazole 40mg, Deurali-Janta,600,7.0,60.0,8
+5,ORS Sachet, Time Pharma,300,20.0,180.0,12
+6,Azithromycin 500mg, Lomus,450,3.0,220.0,8
+7,Ibuprofen 400mg, Quest,950,6.0,28.0,20
+8,Ciprofloxacin 500mg, Nepal Remedies,320,9.0,85.0,10
+9,Diclofenac 50mg, Deurali-Janta,700,4.0,40.0,15
+10,Omeprazole 20mg, Time Pharma,600,5.0,55.0,12
+11,Losartan 50mg, Lomus,500,8.0,90.0,7
+12,Metformin 500mg, Quest,1100,3.0,25.0,25
+13,Doxycycline 100mg, Nepal Remedies,400,7.0,110.0,9
+14,Amlodipine 5mg, Deurali-Janta,750,6.0,45.0,14
+15,Cetirizine 5mg, Time Pharma,880,2.0,30.0,18
+16,Paracetamol 250mg, Lomus,1500,4.0,25.0,30
+17,Amoxiclav 625mg, Quest,300,10.0,180.0,6
+18,Pantoprazole 20mg, Nepal Remedies,520,5.0,45.0,10
+19,Ofloxacin 200mg, Deurali-Janta,410,8.0,95.0,11
+20,Montelukast 10mg, Time Pharma,260,6.0,130.0,5
+21,Atenolol 50mg, Lomus,620,7.0,65.0,9
+22,Hydrochlorothiazide 25mg, Quest,900,4.0,35.0,16
+23,Cloxacillin 500mg, Nepal Remedies,340,11.0,105.0,7
+24,Rabeprazole 20mg, Deurali-Janta,580,5.0,70.0,13
+25,Fexofenadine 120mg, Time Pharma,470,6.0,140.0,8
+26,Cefixime 200mg, Lomus,290,9.0,210.0,4
+27,Tramadol 50mg, Quest,510,3.0,75.0,10
+28,Moxifloxacin 400mg, Nepal Remedies,230,12.0,250.0,3
+29,Glibenclamide 5mg, Deurali-Janta,680,4.0,40.0,12
+30,Loratadine 10mg, Time Pharma,820,5.0,28.0,22
+31,Salbutamol 2mg, Lomus,540,6.0,32.0,15
+32,Erythromycin 250mg, Quest,370,8.0,115.0,7
+33,Fluconazole 150mg, Nepal Remedies,280,7.0,160.0,5
+34,Naproxen 250mg, Deurali-Janta,630,5.0,55.0,11
+35,Domperidone 10mg, Time Pharma,720,4.0,38.0,14
+36,Cephalexin 500mg, Lomus,390,10.0,125.0,6
+37,Clopidogrel 75mg, Quest,460,6.0,95.0,8
+38,Metronidazole 400mg, Nepal Remedies,850,5.0,42.0,20
+39,Amlodipine 10mg, Deurali-Janta,590,7.0,60.0,9
+40,Chlorpheniramine 4mg, Time Pharma,1100,3.0,18.0,30
+41,Dicloxacillin 500mg, Lomus,310,9.0,145.0,5
+42,Bisoprolol 5mg, Quest,540,6.0,80.0,7
+43,Nitrofurantoin 100mg, Nepal Remedies,370,8.0,98.0,6
+44,Spironolactone 25mg, Deurali-Janta,430,5.0,72.0,8
+45,Diazepam 5mg, Time Pharma,280,11.0,45.0,4
+46,Carbamazepine 200mg, Lomus,210,10.0,135.0,3
+47,Prednisolone 5mg, Quest,670,4.0,48.0,16
+48,Ranitidine 150mg, Nepal Remedies,750,5.0,52.0,13
+49,Ketoconazole 200mg, Deurali-Janta,310,7.0,118.0,6
+50,Propranolol 40mg, Time Pharma,490,6.0,62.0,10

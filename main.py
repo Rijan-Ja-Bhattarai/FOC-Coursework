@@ -1,9 +1,8 @@
 import os
 from datetime import datetime as dt
-from FileOperations import read_file, generate_invoice
-from InputFields import get_customer_name, get_medicine_id, get_unit_type, get_quantity, handle_strip_purchase, add_to_cart
-from UtilityFunctions import display
-
+from UtilityFunctions import is_empty, display
+from FileOperations import read_file, generate_invoice, generate_restock_invoice, update_inventory
+from InputFields import get_customer_name, get_medicine_id, get_unit_type, get_quantity, handle_strip_purchase, add_to_cart, get_supplier_name, get_restock_quantity, select_domain
 
 path = os.path.abspath("medicine_info.txt")
 raw_data = read_file(path)
@@ -40,15 +39,53 @@ def main():
     return result
 
 
-med_info = []
+def restock():
+    """Handles the restocking flow for a single medicine entry."""
+
+    display(raw_data)
+
+    supplier_name = get_supplier_name()
+    id = get_medicine_id(raw_data)
+    unit_type, _ = get_unit_type()
+
+    t = raw_data.get(id)
+    med_brand = t[1]
+    med_name = t[0]
+
+    quantity = get_restock_quantity()
+
+    # Add restocked quantity back into stock
+    raw_data[id][2] += quantity
+
+    return [supplier_name, id, med_name, med_brand, unit_type, quantity]
+
+
 opt = ["y", "n", "yes", "no"]
 while True:
-    med_info.append(main()) # Store the contents from main to med_info to be used in other functions
-    print(f"Items in cart \n{med_info}")
+    domain = select_domain()
 
-    cont = add_to_cart(opt)
-    if cont != opt[0]:
-        print("Thank you for choosing Med Store Pvt Ltd. We hope to see you again :D")
-        dot = dt.now()
-        generate_invoice(med_info, dot, path)
+    if domain == "3":
+        print("Thank you for using Med Store Pvt Ltd. Goodbye!")
         break
+
+    med_info = []
+    transaction_type = "sale" if domain == "1" else "restock"
+
+    while True:
+        if transaction_type == "sale":
+            med_info.append(main()) # Store the contents from main to med_info to be used in other functions
+        else:
+            med_info.append(restock()) # Store restock entries to be passed to generate_invoice
+
+        print(f"Items in cart \n{med_info}")
+
+        cont = add_to_cart(opt)
+        if cont != opt[0]:
+            dot = dt.now()
+            if transaction_type == "sale":
+                print("Thank you for choosing Med Store Pvt Ltd. We hope to see you again :D")
+                generate_invoice(med_info, dot, path)
+            else:
+                print("Restock complete. Inventory has been updated.")
+                generate_restock_invoice(med_info, dot, path)
+            break

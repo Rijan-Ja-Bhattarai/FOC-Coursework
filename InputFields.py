@@ -137,6 +137,86 @@ def handle_strip_purchase(quantity, tablet_per_strip, unit_type):
     return unit_type, discount
 
 
+def get_supplier_name():
+    """
+    Prompts and validates the supplier name input during a restock transaction.
+
+    output:
+        A non-empty stripped string representing the supplier's name.
+    """
+    supplier_name = ""
+
+    while is_empty(supplier_name):
+        try:
+            supplier_name = input("Supplier Name: ").strip()
+        except KeyboardInterrupt:
+            print("Input interrupted by user")
+        except Exception:
+            print("An exception occured")
+
+        if is_empty(supplier_name):
+            print("Name can't be empty")
+
+    return supplier_name
+
+
+def get_restock_quantity():
+    """
+    Prompts and validates the restock quantity input.
+    Unlike purchasing, there is no upper stock limit when restocking.
+
+    output:
+        A valid positive integer representing the number of tablets to restock.
+    """
+    quantity = -1
+
+    while quantity <= 0:
+        try:
+            quantity = int(input("Restock Quantity (tablets): "))
+        except ValueError:
+            print("Quantity must be an integer value")
+            continue
+        except KeyboardInterrupt:
+            print("Input interrupted by user")
+            continue
+        if quantity <= 0:
+            print("Quantity must be greater than zero")
+
+    return quantity
+
+
+def select_domain():
+    """
+    Displays the main domain menu and prompts the user to select an operation.
+
+    output:
+        A string representing the user's choice: '1' for sell, '2' for restock, '3' to exit.
+    """
+    valid_options = ["1", "2", "3"]
+    choice = ""
+
+    print("="*40)
+    print("Med Store Pvt Ltd — Main Menu")
+    print("="*40)
+    print("1. Sell Medicines")
+    print("2. Restock Medicines")
+    print("3. Exit")
+    print("="*40)
+
+    # Validate domain selection
+    while choice not in valid_options:
+        try:
+            choice = input("Select an option (1/2/3): ").strip()
+        except KeyboardInterrupt:
+            print("Input interrupted by user")
+        except Exception:
+            print("An exception occured")
+        if choice not in valid_options:
+            print("Invalid option, please enter 1, 2, or 3")
+
+    return choice
+
+
 def add_to_cart(cont_options):
     """
     Prompts the user to decide whether to continue adding medicines to the cart.
