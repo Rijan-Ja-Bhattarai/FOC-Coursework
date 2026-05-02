@@ -1,6 +1,6 @@
 import os
 from datetime import datetime as dt
-from UtilityFunctions import is_empty, display
+from UtilityFunctions import display
 from FileOperations import read_file, generate_invoice, generate_restock_invoice, update_inventory
 from InputFields import get_customer_name, get_medicine_id, get_unit_type, get_quantity, handle_strip_purchase, add_to_cart, get_supplier_name, get_restock_quantity, select_domain
 
