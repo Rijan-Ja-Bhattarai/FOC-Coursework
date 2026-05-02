@@ -64,10 +64,10 @@ def generate_restock_invoice(med_info, date_of_transaction, path):
     # Invoice header — supplier name taken from the first entry as it is shared across the transaction
     supplier_name = med_info[0][0]
     f.write("=" * 70 + "\n")
-    f.write(f"  Med Store Pvt Ltd — VAT Invoice / Restock Receipt\n")
-    f.write(f"  Bill Number : {random.randint(100000, 9999999)}\n")
-    f.write(f"  Date        : {date_of_transaction}\n")
-    f.write(f"  Supplier    : {supplier_name}\n")
+    f.write(f"Med Store Pvt Ltd — VAT Invoice / Restock Receipt\n")
+    f.write(f"Bill Number : {random.randint(100000, 9999999)}\n")
+    f.write(f"Date        : {date_of_transaction}\n")
+    f.write(f"Supplier    : {supplier_name}\n")
     f.write("=" * 70 + "\n")
  
     # Column headers for itemized medicine list
@@ -91,7 +91,7 @@ def generate_restock_invoice(med_info, date_of_transaction, path):
  
         amount = quantity * rate
  
-        f.write(f"  {med_name:<25}{med_brand:<20}{unit_label:<18}Rs.{rate:>6.2f}  Rs.{amount:>8.2f}\n")
+        f.write(f"{med_name:<25}{med_brand:<20}{unit_label:<18}Rs.{rate:>6.2f}  Rs.{amount:>8.2f}\n")
  
     f.write("-" * 70 + "\n")
     f.write(f"{'TOTAL RESTOCKED VALUE':>58}  Rs.{total_cost:>8.2f}\n")
