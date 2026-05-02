@@ -17,6 +17,16 @@ def is_empty(input_field):
 
 
 def calc_invoice(med_info, raw_data):
+    """
+    Function to calculate total cost of purchased drugs 
+
+    Args: 
+        med_info: list of medicine information for data retrival 
+        raw_data: data from original medicine information file for quantity reduction after purchase has been done 
+    
+    Returns: 
+        total cost of purchased medicines 
+    """
     total_cost = 0
     for item in med_info:
         medication = raw_data.get(item[1])

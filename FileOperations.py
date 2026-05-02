@@ -39,6 +39,17 @@ def read_file(path):
 
 
 def generate_invoice(med_info, date_of_transaction, path):
+    """
+    Function to create invoice when the user is selling or restocking medicines 
+
+    Args: 
+        med_info: List of medicine information that is used for data
+        date_of_transaction: Time of transaction used from date time library 
+        path: Original data file path 
+    
+    Output:
+        Generates separate files for invoice of medicine sold and restocking inventory
+    """
     raw_data = read_file(path)
     total_cost = calc_invoice(med_info, raw_data)
     output_path = os.path.abspath("invoice.txt")
