@@ -16,7 +16,7 @@ def is_empty(input_field):
     
 
 
-def calc_invoice(med_info):
+def calc_invoice(med_info, raw_data):
     total_cost = 0
     for item in med_info:
         medication = raw_data.get(item[1])

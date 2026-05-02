@@ -1,3 +1,4 @@
+import os
 import random 
 from UtilityFunctions import calc_invoice
 
@@ -37,8 +38,9 @@ def read_file(path):
     return med_info
 
 
-def generate_invoice(med_info, date_of_transaction):
-    total_cost = calc_invoice(med_info)
+def generate_invoice(med_info, date_of_transaction, path):
+    raw_data = read_file(path)
+    total_cost = calc_invoice(med_info, raw_data)
     output_path = os.path.abspath("invoice.txt")
     try:
         f = open(output_path, "a+")
@@ -47,9 +49,9 @@ def generate_invoice(med_info, date_of_transaction):
         return
 
     f.write("="*60 + "\n")
-    f.write(f"  Bill Number: {random.randint(100000, 9999999)}\n")
-    f.write(f"  Med Store Pvt Ltd — Invoice\n")
-    f.write(f"  Date: {date_of_transaction}\n")
+    f.write(f"Bill Number: {random.randint(100000, 9999999)}\n")
+    f.write(f"Med Store Pvt Ltd — Invoice\n")
+    f.write(f"Date: {date_of_transaction}\n")
     f.write("="*60 + "\n")
 
     for item in med_info:  
@@ -64,7 +66,7 @@ def generate_invoice(med_info, date_of_transaction):
         f.write(f"  Quantity : {quantity} {unit_type}\n")
         f.write("-"*60 + "\n")
 
-    f.write(f"  TOTAL: Rs. {total_cost:.2f}\n")
+    f.write(f"TOTAL: Rs. {total_cost:.2f}\n")
     f.write("="*60 + "\n\n")
 
     print(f"Invoice created at {output_path}")

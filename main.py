@@ -50,5 +50,5 @@ while True:
     if cont != opt[0]:
         print("Thank you for choosing Med Store Pvt Ltd. We hope to see you again :D")
         dot = dt.now()
-        generate_invoice(med_info, dot)
+        generate_invoice(med_info, dot, path)
         break
