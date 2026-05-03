@@ -47,7 +47,7 @@ def get_medicine_id(raw_data):
             print("Input cancelled by user")
         except Exception:
             print("An exception occured")
-        if id < 0:
+        if id < 0 or id > len(raw_data.keys()):
             print("Invalid index")
 
     return id
@@ -112,27 +112,43 @@ def handle_strip_purchase(quantity, tablet_per_strip, unit_type):
     output:
         A tuple (unit_type, discount) where:
             - unit_type is the (possibly updated) purchase unit type.
-            - discount is a float discount value (0.5 if eligible) or None if not applicable.
+            - discount is a float discount value (5% if eligible) or None if not applicable.
     """
     discount = None
 
-    if quantity / tablet_per_strip < 1:
-        print("Insufficient number of tablets per strip, buy more tablets to make the purhcase or buy in tablets")
-        discount = None
-        try:
-            opt = input("Do you wish to buy in tablets? (y/n): ").lower()
-            opt = opt[0]
-            while opt not in ["y", "n"]:
-                print("Invalid input")
-                opt = input("Do you wish to buy in tablets? (y/n): ").lower()
-            if opt == "y":
-                unit_type = "t"
-        except KeyboardInterrupt:
-            print("Input interrupted by user")
-        except Exception:
-            print("An exception occured")
-    elif quantity / tablet_per_strip >= 2:
-        discount = 0.5
+    if quantity < 1:
+        print("Invalid Quantity")
+        
+    elif quantity == 1:
+        print("Buy 1 more strip for 5% discount :D")
+        response = ""
+        opt = ["y", "n", "yes", "no"]
+
+
+        # Ask the user to buy 1 more to boost sales by providing discount
+        while response not in opt:
+            try:
+                response = input("Do you wish to buy 1 more strip (y/n): ").lower()
+                response = response[0]
+                try:
+                    if int(response) > 2:
+                        print("Invalid input")
+                    elif int(response) != 0:
+                        response = opt[1]
+                        quantity *= tablet_per_strip
+                        break
+                    else:
+                        response = opt[0]
+                        quantity += 1
+                        quantity *= tablet_per_strip
+                        discount = 0.05
+                        break
+                except ValueError:
+                    continue
+            except KeyboardInterrupt:
+                print("Input interrupted by user")
+    else:
+        quantity *= tablet_per_strip
 
     return unit_type, discount
 

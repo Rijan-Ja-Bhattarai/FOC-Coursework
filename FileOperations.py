@@ -1,4 +1,3 @@
-import os
 import random 
 from UtilityFunctions import calc_invoice
 
@@ -53,7 +52,7 @@ def generate_restock_invoice(med_info, date_of_transaction, path):
     """
     raw_data = read_file(path)
     total_cost = calc_invoice(med_info, raw_data)
-    output_path = os.path.abspath("restock_invoice.txt")
+    output_path = "restock_invoice.txt"
  
     try:
         f = open(output_path, "a+")
@@ -75,10 +74,10 @@ def generate_restock_invoice(med_info, date_of_transaction, path):
     f.write("-" * 70 + "\n")
  
     for item in med_info:
-        med_name  = item[2]
+        med_name = item[2]
         med_brand = item[3]
         unit_type = item[4]
-        quantity  = item[5]
+        quantity = item[5]
         medication = raw_data.get(item[1])
  
         # Resolve rate and display label based on unit type
@@ -116,7 +115,7 @@ def generate_invoice(med_info, date_of_transaction, path):
     """
     raw_data = read_file(path)
     total_cost = calc_invoice(med_info, raw_data)
-    output_path = os.path.abspath("invoice.txt")
+    output_path = "invoice.txt"
  
     try:
         f = open(output_path, "a+")
