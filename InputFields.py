@@ -208,29 +208,85 @@ def select_domain():
     output:
         A string representing the user's choice: '1' for sell, '2' for restock, '3' to exit.
     """
+
+    
+    BANNER = """                                                                                                                                                                    
+                                                               dddddddd                                                                                               
+MMMMMMMM               MMMMMMMM                                d::::::d   SSSSSSSSSSSSSSS      tttt                                                                   
+M:::::::M             M:::::::M                                d::::::d SS:::::::::::::::S  ttt:::t                                                                   
+M::::::::M           M::::::::M                                d::::::dS:::::SSSSSS::::::S  t:::::t                                                                   
+M:::::::::M         M:::::::::M                                d:::::d S:::::S     SSSSSSS  t:::::t                                                                   
+M::::::::::M       M::::::::::M    eeeeeeeeeeee        ddddddddd:::::d S:::::S        ttttttt:::::ttttttt       ooooooooooo   rrrrr   rrrrrrrrr       eeeeeeeeeeee    
+M:::::::::::M     M:::::::::::M  ee::::::::::::ee    dd::::::::::::::d S:::::S        t:::::::::::::::::t     oo:::::::::::oo r::::rrr:::::::::r    ee::::::::::::ee  
+M:::::::M::::M   M::::M:::::::M e::::::eeeee:::::ee d::::::::::::::::d  S::::SSSS     t:::::::::::::::::t    o:::::::::::::::or:::::::::::::::::r  e::::::eeeee:::::ee
+M::::::M M::::M M::::M M::::::Me::::::e     e:::::ed:::::::ddddd:::::d   SS::::::SSSSStttttt:::::::tttttt    o:::::ooooo:::::orr::::::rrrrr::::::re::::::e     e:::::e
+M::::::M  M::::M::::M  M::::::Me:::::::eeeee::::::ed::::::d    d:::::d     SSS::::::::SS    t:::::t          o::::o     o::::o r:::::r     r:::::re:::::::eeeee::::::e
+M::::::M   M:::::::M   M::::::Me:::::::::::::::::e d:::::d     d:::::d        SSSSSS::::S   t:::::t          o::::o     o::::o r:::::r     rrrrrrre:::::::::::::::::e 
+M::::::M    M:::::M    M::::::Me::::::eeeeeeeeeee  d:::::d     d:::::d             S:::::S  t:::::t          o::::o     o::::o r:::::r            e::::::eeeeeeeeeee  
+M::::::M     MMMMM     M::::::Me:::::::e           d:::::d     d:::::d             S:::::S  t:::::t    tttttto::::o     o::::o r:::::r            e:::::::e           
+M::::::M               M::::::Me::::::::e          d::::::ddddd::::::ddSSSSSSS     S:::::S  t::::::tttt:::::to:::::ooooo:::::o r:::::r            e::::::::e          
+M::::::M               M::::::M e::::::::eeeeeeee   d:::::::::::::::::dS::::::SSSSSS:::::S  tt::::::::::::::to:::::::::::::::o r:::::r             e::::::::eeeeeeee  
+M::::::M               M::::::M  ee:::::::::::::e    d:::::::::ddd::::dS:::::::::::::::SS     tt:::::::::::tt oo:::::::::::oo  r:::::r              ee:::::::::::::e  
+MMMMMMMM               MMMMMMMM    eeeeeeeeeeeeee     ddddddddd   ddddd SSSSSSSSSSSSSSS         ttttttttttt     ooooooooooo    rrrrrrr                eeeeeeeeeeeeee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+"""
+    ART = """
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⠛⠛⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠋⠉⠀⠀⠉⠙⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣶⣶⠀⠀⣶⣶⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣿⠛⠃⠈⠻⠿⣶⣶⠿⠟⠁⠘⠛⣿⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢀⣀⣀⣀⣀⠀⣿⣀⣋⣸⣷⣆⣀⣀⣰⣾⣇⣙⣀⣿⠀⣀⣀⣀⣀⡀⠀⠀
+⠀⠀⢸⡏⢉⠉⣿⠀⣿⠉⡉⢹⣿⡏⢉⡉⢹⣿⡏⢉⠉⣿⠀⣿⠉⡉⢹⡇⠀⠀
+⠀⠀⢸⡇⣿⠀⣿⠀⣿⠀⣿⢸⣿⡇⢸⡇⢸⣿⡇⣿⠀⣿⠀⣿⠀⣿⢸⡇⠀⠀
+⠀⠀⢸⣇⣈⣀⣿⠀⣿⣀⣁⣸⣿⣇⣈⣁⣸⣿⣇⣈⣀⣿⠀⣿⣀⣁⣸⡇⠀⠀
+⠀⠀⢸⡏⣩⠉⣿⠀⣿⠉⣍⢹⣿⡏⢩⡍⢹⣿⡏⣩⠉⣿⠀⣿⠉⣍⢹⡇⠀⠀
+⠀⠀⢸⡇⣿⠀⣿⠀⣿⠀⣿⢸⣿⡇⢸⡇⢸⣿⡇⣿⠀⣿⠀⣿⠀⣿⢸⡇⠀⠀
+⠀⠀⢸⣧⣤⣤⣿⠀⣿⣤⣤⣼⣿⣧⣤⣤⣼⣿⣧⣤⣤⣿⠀⣿⣤⣤⣼⡇⠀⠀
+⠀⠀⢸⡇⢤⠀⣿⠀⣿⠀⡤⢸⡇⢠⣤⣤⡄⢸⡇⢤⠀⣿⠀⣿⠀⡤⢸⡇⠀⠀
+⠀⠀⢸⣷⣶⣶⣿⠀⣿⣶⣶⣾⡇⢸⣿⣿⡇⢸⣷⣶⣶⣿⠀⣿⣶⣶⣾⡇⠀⠀
+⠀⠀⠈⠉⠉⠉⠉⠀⠉⠉⠉⠉⠁⠈⠉⠉⠁⠈⠉⠉⠉⠉⠀⠉⠉⠉⠉⠁⠀⠀
+""".splitlines()
+
+    MENU = [
+    "\t   Med Store Pvt Ltd",
+    "=" * 30,
+    "",
+    "  [ 1 ]  Sell Medicines",
+    "  [ 2 ]  Restock Medicines",
+    "  [ 3 ]  Exit",
+    "",
+    "=" * 30]
+
+    # Print the banner
+    print(BANNER)
+    # Center the menu vertically against the art
+    height = max(len(ART), len(MENU))
+    art_lines = center_lines(ART, height)
+    menu_lines = center_lines(MENU, height)
+
+    art_width = max(len(line) for line in ART)
+
+    for a, m in zip(art_lines, menu_lines):
+        print(f"  {a:<{art_width}}    {m}")
+
     valid_options = ["1", "2", "3"]
     choice = ""
-
-    print("="*40)
-    print("Med Store Pvt Ltd — Main Menu")
-    print("="*40)
-    print("1. Sell Medicines")
-    print("2. Restock Medicines")
-    print("3. Exit")
-    print("="*40)
-
-    # Validate domain selection
     while choice not in valid_options:
         try:
             choice = input("Select an option (1/2/3): ").strip()
         except KeyboardInterrupt:
             print("Input interrupted by user")
         except Exception:
-            print("An exception occured")
+            print("An exception occurred")
         if choice not in valid_options:
-            print("Invalid option, please enter 1, 2, or 3")
-
+            print("  Invalid option, please enter 1, 2, or 3")
     return choice
+
+def center_lines(lines, height):
+    """Return a list of length 'height' with 'lines' vertically centered."""
+    top = (height - len(lines)) // 2
+    bottom = height - len(lines) - top
+    return [""] * top + lines + [""] * bottom
 
 
 def add_to_cart(cont_options):
