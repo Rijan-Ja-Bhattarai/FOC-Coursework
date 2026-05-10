@@ -52,7 +52,7 @@ def generate_restock_invoice(med_info, date_of_transaction, path):
     """
     raw_data = read_file(path)
     total_cost = calc_invoice(med_info, raw_data)
-    output_path = "restock_invoice.txt"
+    output_path = f"restock_invoice_{date_of_transaction}.txt"
  
     try:
         f = open(output_path, "a+")
@@ -115,10 +115,10 @@ def generate_invoice(med_info, date_of_transaction, path):
     """
     raw_data = read_file(path)
     total_cost = calc_invoice(med_info, raw_data)
-    output_path = "invoice.txt"
+    output_path = f"invoice {date_of_transaction}.txt"
  
     try:
-        f = open(output_path, "a+")
+        f = open(output_path, "w")
     except Exception as e:
         print(e)
         return
@@ -158,12 +158,6 @@ def update_inventory(raw_data, path):
         path:     Path to the original inventory file to overwrite.
     Output:
         Overwrites medicine_info.txt with updated stock quantities.
- 
-    Note:
-        This function assumes each record in the file is stored as a
-        comma-separated line in the format:
-            id,medicine_name,brand_name,quantity,tablet_rate,strip_rate,tablets_per_strip
-        Adjust the write format below if your file uses a different structure.
     """
     try:
         f = open(path, "w")

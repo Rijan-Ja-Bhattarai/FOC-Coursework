@@ -1,2 +1,6 @@
-.docx
-.docx#
+*.docx
+*.docx#
+*.pdf
+*.txt
+*.zip
+__pycache__//

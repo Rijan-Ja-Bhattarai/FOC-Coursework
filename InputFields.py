@@ -85,7 +85,7 @@ def get_quantity(tablet_quantity):
     quantity = -1
 
     # Validate sufficient amount of quantity w.r.t unit type
-    while quantity < 0 or quantity > tablet_quantity:
+    while quantity <= 0 or quantity > tablet_quantity:
         try:
             quantity = int(input("Quantity: "))
         except ValueError:
