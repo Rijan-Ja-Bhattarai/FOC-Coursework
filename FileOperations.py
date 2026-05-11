@@ -55,7 +55,7 @@ def generate_restock_invoice(med_info, date_of_transaction, path):
     output_path = f"restock_invoice_{date_of_transaction}.txt"
  
     try:
-        f = open(output_path, "a+")
+        f = open(output_path, "w")
     except Exception as e:
         print(e)
         return

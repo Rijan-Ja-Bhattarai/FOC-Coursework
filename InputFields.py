@@ -37,7 +37,7 @@ def get_medicine_id(raw_data):
     id = -1
 
     # Validate id
-    while id > len(raw_data) or id <= 0:
+    while id > len(raw_data) or id < 0:
         try:
             id = int(input("Medicine ID: "))
         except ValueError:
@@ -128,7 +128,7 @@ def handle_strip_purchase(quantity, tablet_per_strip, unit_type):
         # Ask the user to buy 1 more to boost sales by providing discount
         while response not in opt:
             try:
-                response = input("Do you wish to buy 1 more strip (y/n): ").lower()
+                response = input("Do you wish to buy 1 more strip (0/1): ").lower()
                 response = response[0]
                 try:
                     if int(response) > 2:
